@@ -18,6 +18,18 @@ umask 0022
 #------------------------------------------------------------------------------
 
 
+usage() {
+    cat << EOS
+Usage: git wt <command> [args]
+
+Commands:
+    add <name>      Create a new worktree (creates branch if not exists)
+    list, ls        List worktrees
+    paths           List worktree paths
+    remove, rm <name>  Remove a worktree
+EOS
+}
+
 err() {
     echo "Error: $@" 1>&2
     exit 1
@@ -72,18 +84,6 @@ wt_project_path() {
     fi
 
     echo "${wpath}"
-}
-
-usage() {
-    cat << EOS
-Usage: git wt <command> [args]
-
-Commands:
-    add <name>      Create a new worktree (creates branch if not exists)
-    list, ls        List worktrees
-    paths           List worktree paths
-    remove, rm <name>  Remove a worktree
-EOS
 }
 
 main() {
