@@ -65,6 +65,12 @@ wt_project_path() {
                 wpath="${host}/${path}"
                 ;;
 
+            ssh://*)
+                local host="$(printf '%s\n' "$url" | sed -E 's#ssh://([^@/]*@)?([^/:]+)[:/]?.*#\2#')"
+                local path="$(printf '%s\n' "$url" | sed -E 's#ssh://[^/]*/(.*)#\1#')"
+                wpath="${host}/${path}"
+                ;;
+
             http://*|https://*)
                 local host="$(printf '%s\n' "$url" | sed -E 's#https?://([^/]+)/.*#\1#')"
                 local path="$(printf '%s\n' "$url" | sed -E 's#https?://[^/]+/(.*)#\1#')"
